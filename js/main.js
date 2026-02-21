@@ -7,7 +7,8 @@ const projects = [
         description: 'Interactive business investment model with Simple & Discounted Payback Period, NPV, IRR, and Sensitivity Analysis. Handles multi-year investment outlays.',
         tags: ['Python', 'Excel', 'DCF', 'IRR'],
         status: 'In Progress',
-        year: '2024'
+        year: '2026',
+        link: 'payback.html'
     },
     {
         icon: '📊',
@@ -15,7 +16,8 @@ const projects = [
         description: 'Built using Modern Portfolio Theory (MPT) to find the optimal asset allocation. Includes Efficient Frontier, Max Sharpe Ratio, and Minimum Variance portfolios.',
         tags: ['Python', 'NumPy', 'Monte Carlo', 'MPT'],
         status: 'Coming Soon',
-        year: '2026'
+        year: '2026',
+        link: null
     },
     {
         icon: '📈',
@@ -23,7 +25,8 @@ const projects = [
         description: 'Discounted Cash Flow model for equity valuation using real company financials. Includes scenario analysis and sensitivity tables.',
         tags: ['Excel', 'Valuation', 'DCF', 'Finance'],
         status: 'Coming Soon',
-        year: '2026'
+        year: '2026',
+        link: null
     },
     {
         icon: '🏦',
@@ -31,7 +34,8 @@ const projects = [
         description: 'Leveraged Buyout model simulating a private equity acquisition with full debt schedules, returns analysis, IRR and MOIC outputs.',
         tags: ['Excel', 'Private Equity', 'LBO', 'IRR'],
         status: 'Coming Soon',
-        year: '2026'
+        year: '2026',
+        link: null
     },
 ]
 
@@ -41,11 +45,18 @@ function renderProjects() {
     grid.innerHTML = ''
 
     projects.forEach(p => {
-        const statusColor = p.status === 'Completed'    ? '#00e599' 
-                          : p.status === 'In Progress'  ? '#f0c040' 
-                          : '#ffffff'
+        const statusColor = p.status === 'Completed'   ? '#00e599'
+                          : p.status === 'In Progress' ? '#f0c040'
+                          : '#606070'
 
-        const tags = p.tags.map(t => `<span class="tag">${t}</span>`).join('')
+        const tags   = p.tags.map(t => `<span class="tag">${t}</span>`).join('')
+        const button = p.link
+            ? `<a href="${p.link}" class="btn-primary" style="font-size:0.85rem; padding:8px 20px;">
+                   Open Model →
+               </a>`
+            : `<span style="font-size:0.82rem; color:var(--text-muted); font-style:italic;">
+                   Coming Soon
+               </span>`
 
         grid.innerHTML += `
             <div class="project-card">
@@ -56,6 +67,9 @@ function renderProjects() {
                 <div class="project-footer">
                     <span style="color:${statusColor}; font-weight:600;">● ${p.status}</span>
                     <span>${p.year}</span>
+                </div>
+                <div style="margin-top:1.2rem;">
+                    ${button}
                 </div>
             </div>
         `

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Payback Period Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+    <!-- ── NAVIGATION ──────────────────────────────────────── -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">FinancePortfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">← Back to Portfolio</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ── PAGE HEADER ─────────────────────────────────────── -->
+    <section class="model-hero">
+        <div class="model-hero-content">
+            <p class="hero-tag">Financial Model</p>
+            <h1>Payback Period <span class="highlight">Calculator</span></h1>
+            <p class="hero-sub">Calculate Simple & Discounted Payback Period for any business investment. Supports fixed growth and uneven cash flow patterns.</p>
+        </div>
+    </section>
+
+    <!-- ── CALCULATOR ───────────────────────────────────────── -->
+    <section class="calculator-section">
+        <div class="calculator-vertical">
+
+            <!-- Input Panel -->
+            <div class="calc-inputs-top">
+                <h3>📝 Inputs</h3>
+                <div class="inputs-grid">
+
+                    <!-- Column 1 -->
+                    <div class="input-col">
+                        <div class="input-group">
+                            <label>Business Name</label>
+                            <input type="text" id="biz-name" placeholder="e.g. My Startup"/>
+                        </div>
+                        <div class="input-group">
+                            <label>Initial Investment ($)</label>
+                            <input type="number" id="lump-sum-amount" placeholder="e.g. 1000000"/>
+                        </div>
+                        <div class="input-group">
+                            <label>Number of Years</label>
+                            <input type="number" id="num-years" placeholder="e.g. 5" min="1" max="20"/>
+                        </div>
+                        <div class="input-group">
+                            <label>Discount Rate (%)</label>
+                            <input type="number" id="discount-rate" placeholder="e.g. 10"/>
+                        </div>
+                        <div class="input-group">
+                            <label>Tax Rate (%)</label>
+                            <input type="number" id="tax-rate" placeholder="e.g. 25"/>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="input-col">
+                        <div class="input-group">
+                            <label>Cash Flow Pattern</label>
+                            <div class="toggle-group">
+                                <label class="toggle-option">
+                                    <input type="radio" name="cf-mode" value="fixed" checked
+                                           onchange="onModeChange()"/>
+                                    <span>Fixed Growth Rate</span>
+                                </label>
+                                <label class="toggle-option">
+                                    <input type="radio" name="cf-mode" value="uneven"
+                                           onchange="onModeChange()"/>
+                                    <span>Uneven (Year by Year)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="cf-fixed-inputs">
+                            <div class="input-group">
+                                <label>Year 1 Cash Flow ($)</label>
+                                <input type="number" id="cf-year1" placeholder="e.g. 200000"/>
+                            </div>
+                            <div class="input-group">
+                                <label>Annual Growth Rate (%)</label>
+                                <input type="number" id="cf-growth" placeholder="e.g. 10"/>
+                            </div>
+                        </div>
+
+                        <div id="cf-uneven-note" style="display:none;">
+                            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.5rem;">
+                                📋 Enter Number of Years and click
+                                <strong style="color:var(--accent)">Generate Input Table</strong>
+                                to fill in each year's cash flow.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="calc-actions">
+                <button class="btn-secondary" id="btn-generate" onclick="generateInputTable()">
+                    Generate Input Table ↓
+                </button>
+                <button class="btn-primary" id="btn-calculate" onclick="runCalculator()"
+                        style="display:none;">
+                    Calculate ▶
+                </button>
+            </div>
+
+            <!-- Dynamic Table -->
+            <div id="dynamic-table"></div>
+
+            <!-- Results -->
+            <div class="calc-results-full" id="calc-results" style="display:none;"></div>
+
+            <!-- Chart -->
+            <div class="chart-wrapper" id="chart-wrapper" style="display:none;">
+                <canvas id="payback-chart"></canvas>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── FOOTER ────────────────────────────────────────────── -->
+    <footer>
+        <p>Built with 💛 | Finance Portfolio © 2025 | <a href="index.html" style="color:var(--accent); text-decoration:none;">← Back to Portfolio</a></p>
+    </footer>
+
+    <script src="js/payback.js"></script>
+
+</body>
+</html>

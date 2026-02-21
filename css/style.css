@@ -704,3 +704,23 @@ footer {
 .toggle-option:hover { border-color: var(--accent); color: var(--text-primary); }
 
 .toggle-option input[type="radio"] { accent-color: var(--accent); }
+
+/* ── MODEL PAGE HERO ─────────────────────────────────────── */
+.model-hero {
+    padding: 120px 2rem 60px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 40%, #1a1a2e 0%, var(--bg-primary) 70%);
+}
+
+.model-hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.model-hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
