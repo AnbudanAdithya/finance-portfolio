@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Finance Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+    <!-- Chart.js for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Your stylesheet -->
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+
+    <!-- ── NAVIGATION ──────────────────────────────────────── -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">Project Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#calculator">Calculator</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ── HERO SECTION ────────────────────────────────────── -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="hero-tag">Finance & Investments</p>
+            <h1>Financial Models <br/> Built for <span class="highlight">Real Decisions</span></h1>
+            <p class="hero-sub">A showcase of financial models covering Business Analysis, Investment analysis,
+            portfolio optimization, and business valuation.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-primary">View Projects</a>
+                <a href="#calculator" class="btn-secondary">Try Calculator</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-card">
+                <h3 id="stat-projects">0</h3>
+                <p>Projects Built</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-models">0</h3>
+                <p>Models</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-tools">0</h3>
+                <p>Tools Used</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PROJECTS SECTION ─────────────────────────────────── -->
+    <section id="projects" class="projects">
+        <div class="section-header">
+            <p class="section-tag">Portfolio</p>
+            <h2>Finance Projects</h2>
+            <p class="section-sub">Each model is built with real-world assumptions and industry-standard methodology.</p>
+        </div>
+        <div class="projects-grid" id="projects-grid">
+            <!-- Project cards injected by main.js -->
+        </div>
+    </section>
+
+<!-- ── PAYBACK PERIOD CALCULATOR ───────────────────────── -->
+<section id="calculator" class="calculator-section">
+    <div class="section-header">
+        <p class="section-tag">Interactive Tool</p>
+        <h2>Payback Period Calculator</h2>
+        <p class="section-sub">Enter your assumptions and get instant results.</p>
+    </div>
+
+    <div class="calculator-vertical">
+
+        <!-- ── INPUT PANEL ─────────────────────────────── -->
+        <div class="calc-inputs-top">
+            <h3>📝 Inputs</h3>
+
+            <div class="inputs-grid">
+
+                <!-- Column 1: Basic Info -->
+                <div class="input-col">
+                    <div class="input-group">
+                        <label>Business Name</label>
+                        <input type="text" id="biz-name" placeholder="e.g. My Startup"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Initial Investment ($)</label>
+                        <input type="number" id="lump-sum-amount" placeholder="e.g. 1000000"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Number of Years</label>
+                        <input type="number" id="num-years" placeholder="e.g. 5" min="1" max="20"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Discount Rate (%)</label>
+                        <input type="number" id="discount-rate" placeholder="e.g. 10"/>
+                    </div>
+                    <div class="input-group">
+                        <label>Tax Rate (%)</label>
+                        <input type="number" id="tax-rate" placeholder="e.g. 25"/>
+                    </div>
+                </div>
+
+                <!-- Column 2: Cash Flow Pattern -->
+                <div class="input-col">
+                    <div class="input-group">
+                        <label>Cash Flow Pattern</label>
+                        <div class="toggle-group">
+                            <label class="toggle-option">
+                                <input type="radio" name="cf-mode" value="fixed" checked
+                                    onchange="onModeChange()"/>
+                                <span>Fixed Growth Rate</span>
+                            </label>
+                            <label class="toggle-option">
+                                <input type="radio" name="cf-mode" value="uneven"
+                                    onchange="onModeChange()"/>
+                                <span>Uneven (Year by Year)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Fixed CF inputs -->
+                    <div id="cf-fixed-inputs">
+                        <div class="input-group">
+                            <label>Year 1 Cash Flow ($)</label>
+                            <input type="number" id="cf-year1" placeholder="e.g. 200000"/>
+                        </div>
+                        <div class="input-group">
+                            <label>Annual Growth Rate (%)</label>
+                            <input type="number" id="cf-growth" placeholder="e.g. 10"/>
+                        </div>
+                    </div>
+
+                    <!-- Uneven CF note -->
+                    <div id="cf-uneven-note" style="display:none;">
+                        <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.5rem;">
+                            📋 Enter Number of Years and click
+                            <strong style="color:var(--accent)">Generate Input Table</strong>
+                            to fill in each year's cash flow.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Buttons — outside grid so they center across full width -->
+            <div class="calc-actions">
+                <button class="btn-secondary" id="btn-generate" onclick="generateInputTable()">
+                    Generate Input Table ↓
+                </button>
+                <button class="btn-primary" id="btn-calculate" onclick="runCalculator()"
+                        style="display:none;">
+                    Calculate ▶
+                </button>
+            </div>
+
+        <!-- ── DYNAMIC TABLE (uneven mode) ─────────────── -->
+        <div id="dynamic-table"></div>
+
+        <!-- ── RESULTS ──────────────────────────────────── -->
+        <div class="calc-results-full" id="calc-results" style="display:none;">
+        </div>
+
+        <!-- ── CHART ────────────────────────────────────── -->
+        <div class="chart-wrapper" id="chart-wrapper" style="display:none;">
+            <canvas id="payback-chart"></canvas>
+        </div>
+
+    </div>
+</section>
+
+    <!-- ── ABOUT SECTION ────────────────────────────────────── -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <p class="section-tag">About Me</p>
+            <h2>Finance Meets <span class="highlight">Technology</span></h2>
+            <p>I build financial models that combine rigorous methodology with modern tools —
+            Python, Excel, and interactive web applications — to turn complex data into
+            clear, actionable insights.</p>
+            <div class="skills-grid">
+                <div class="skill-tag">Python</div>
+                <div class="skill-tag">Excel / VBA</div>
+                <div class="skill-tag">Portfolio Theory</div>
+                <div class="skill-tag">DCF Modeling</div>
+                <div class="skill-tag">Risk Analysis</div>
+                <div class="skill-tag">Data Visualization</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CONTACT SECTION ──────────────────────────────────── -->
+    <section id="contact" class="contact">
+        <div class="section-header">
+            <p class="section-tag">Get In Touch</p>
+            <h2>Let's Connect</h2>
+            <p class="section-sub">Open to collaborations, internships, and finance roles.</p>
+        </div>
+        <div class="contact-links">
+            <a href="mailto:your@email.com" class="contact-card">📧 Email</a>
+            <a href="https://linkedin.com" class="contact-card" target="_blank">💼 LinkedIn</a>
+            <a href="https://github.com" class="contact-card" target="_blank">🐙 GitHub</a>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ────────────────────────────────────────────── -->
+    <footer>
+        <p>Built with 💛 | Finance Portfolio © 2026</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/payback.js"></script>
+
+</body>
+</html>
