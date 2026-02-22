@@ -51,7 +51,7 @@ function generateInputTable() {
                     <thead>
                         <tr>
                             <th>Year</th>
-                            <th>Net Cash Flow ($)</th>
+                            <th>Net Cash Flow (₹)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -188,7 +188,7 @@ function renderResults(name, simplePayback, discountedPayback,
     const fmt = n => {
         if (n === null || n === undefined || isNaN(n)) return '—'
         const abs = Math.abs(n)
-        const str = '$' + abs.toLocaleString('en-US', { maximumFractionDigits: 0 })
+        const str = '₹' + abs.toLocaleString('en-IN', { maximumFractionDigits: 0 })
         return n < 0 ? `(${str})` : str
     }
 
@@ -336,7 +336,62 @@ function renderChart(years, cumulativeCF, cumulativeDCF, netCF, investment) {
                     font: { family: 'Inter', size: 16, weight: '600' },
                     padding: { bottom: 20 }
                 },
-                legend: { labels: { color: '#a0a0b0', font: { family: 'Inter' } } },
+                legend: { 
+                    labels: { 
+                        color: '#a0a0b0', 
+                        font: { family: 'Inter' },
+                        usePointStyle: true, // Tells Chart.js to use our custom shapes
+                        padding:25,
+                        boxpadding:10,
+
+                        generateLabels: function(chart) {
+                            
+                            // 1. Create a dual-color box (Orange & Black) for Cash Flow
+                            const createDualBox = () => {
+                                const c = document.createElement('canvas');
+                                c.width = 28; c.height = 16;
+                                const ctx = c.getContext('2d');
+                                ctx.fillStyle = 'rgba(220,100,30,0.85)'; // Orange
+                                ctx.fillRect(0, 0, 8, 16);
+                                ctx.fillStyle = 'rgba(30,80,160,0.85)';      // Blue
+                                ctx.fillRect(8, 0, 8, 16);
+                                return c;
+                            };
+
+                            // 2. Create a literal line with a circle marker on it
+                            const createLineMarker = (color, isDash) => {
+                                const c = document.createElement('canvas');
+                                c.width = 44; c.height = 16;
+                                const ctx = c.getContext('2d');
+                                
+                                // Draw the line
+                                ctx.strokeStyle = color;
+                                ctx.lineWidth = 2.5;
+                                if (isDash) ctx.setLineDash([5, 3]);
+                                ctx.beginPath(); ctx.moveTo(0, 8); ctx.lineTo(32, 8); ctx.stroke();
+                                
+                                // Draw the circle marker in the middle
+                                ctx.setLineDash([]);
+                                ctx.fillStyle = color;
+                                ctx.beginPath(); ctx.arc(16, 8, 4.5, 0, 2 * Math.PI); ctx.fill();
+                                return c;
+                            };
+
+                            // 3. Apply these custom shapes to the correct datasets
+                            const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                            labels.forEach((label, i) => {
+                                if (i === 2) {
+                                    label.pointStyle = createDualBox(); // Cash Flow
+                                } else if (i === 0) {
+                                    label.pointStyle = createLineMarker('#f0c040', false); // Cumul CF
+                                } else if (i === 1) {
+                                    label.pointStyle = createLineMarker('#00e599', true);  // Disc Cumul CF
+                                }
+                            });
+                            return labels;
+                        }
+                    } 
+                },
                 tooltip: {
                     backgroundColor: '#16161f',
                     borderColor: '#2a2a3a',
@@ -347,21 +402,30 @@ function renderChart(years, cumulativeCF, cumulativeDCF, netCF, investment) {
                     callbacks: {
                         label: ctx => {
                             const v = ctx.raw
-                            return ` ${ctx.dataset.label}: ${v < 0 ? '-' : '+'}$${Math.abs(v).toLocaleString('en-US', { maximumFractionDigits: 0 })}`
+                            return ` ${ctx.dataset.label}: ${v < 0 ? '-' : '+'}$${Math.abs(v).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`
                         }
                     }
                 }
             },
             scales: {
-                x: { ticks: { color: '#a0a0b0' }, grid: { color: '#2a2a3a' } },
+                x: { ticks: { color: '#a0a0b0', padding:20 }, grid: { color: '#2a2a3a' } 
+            },
                 y: {
+                    grace:'10%',
                     ticks: {
                         color: '#a0a0b0',
                         callback: v => {
                             const abs = Math.abs(v)
-                            const str = abs >= 1_000_000
-                                ? '$' + (abs/1_000_000).toFixed(1) + 'M'
-                                : '$' + (abs/1_000).toFixed(0) + 'k'
+                            let str = '';
+                            if (abs >= 10000000) {
+                                str = '₹' + (abs/10000000).toFixed(2) + 'Cr';
+                            } else if (abs >= 100000) {
+                                str = '₹' + (abs/100000).toFixed(2) + 'L';
+                            } else if (abs >= 1000) {
+                                str = '₹' + (abs/1000).toFixed(0) + 'k';
+                            } else {
+                                str = '₹' + abs.toLocaleString('en-IN');
+                            }
                             return v < 0 ? `(${str})` : str
                         }
                     },
@@ -388,10 +452,10 @@ function renderChart(years, cumulativeCF, cumulativeDCF, netCF, investment) {
                     const val = data.datasets[0].data[i]
                     if (val == null) return
                     const abs   = Math.abs(val)
-                    const label = (val < 0 ? '-' : '') + '$' + (
-                        abs >= 1_000_000
-                            ? (abs/1_000_000).toFixed(1) + 'M'
-                            : abs.toLocaleString('en-US', { maximumFractionDigits: 0 })
+                    const label = (val < 0 ? '-' : '') + '₹' + (
+                        abs >= 10000000 ? (abs/10000000).toFixed(2) + 'Cr' :
+                        abs >= 100000 ? (abs/100000).toFixed(2) + 'L' :
+                        abs.toLocaleString('en-IN', { maximumFractionDigits: 0 })
                     )
                     ctx.fillStyle = '#ffffff'
                     ctx.font = '600 10px Inter'

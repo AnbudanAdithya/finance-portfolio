@@ -3,22 +3,26 @@
 const projects = [
      {
         icon: '💰',
-        title: 'NPV, IRR and Payback Period Model',
-        description: 'Interactive business investment model with Simple & Discounted Payback Period, NPV, IRR, and Sensitivity Analysis. Handles multi-year investment outlays.',
-        tags: ['Python', 'Excel', 'DCF', 'IRR'],
-        status: 'In Progress',
+        title: 'Payback Period Calculator',
+        description: 'Interactive model to calculate payback period, discounted payback, for any cash flow stream. Built with Python, Excel and HTML',
+        tags: ['Excel + VBA', 'DCF', 'Graphs'],
+        status: 'Completed',
         year: '2026',
-        link: 'payback.html'
+        link: 'payback.html',
+        modelCount: 3
     },
+
     {
         icon: '📊',
         title: 'Portfolio Optimization Model',
         description: 'Built using Modern Portfolio Theory (MPT) to find the optimal asset allocation. Includes Efficient Frontier, Max Sharpe Ratio, and Minimum Variance portfolios.',
-        tags: ['Python', 'NumPy', 'Monte Carlo', 'MPT'],
+        tags: ['Python', 'NumPy', 'Monte Carlo', 'MPT','Graphs'],
         status: 'Coming Soon',
         year: '2026',
-        link: null
+        link: null,
+        modelCount: 4
     },
+    /*
     {
         icon: '📈',
         title: 'DCF Valuation Model',
@@ -36,7 +40,7 @@ const projects = [
         status: 'Coming Soon',
         year: '2026',
         link: null
-    },
+    },*/
 ]
 
 // ── INJECT PROJECT CARDS ──────────────────────────────────────
@@ -130,9 +134,22 @@ function initScrollSpy() {
 // ── INIT ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     renderProjects()
-    animateCounter('stat-projects', projects.length)
-    animateCounter('stat-models', 8)
-    animateCounter('stat-tools', 5)
+    
+    // 1. Calculate active projects (you can base this on the whole array, or just ones not "Coming Soon")
+    const totalProjects = projects.length;
+    
+    // 2. Dynamically sum up the 'modelCount' from all projects
+    const totalModels = projects.reduce((sum, project) => sum + (project.modelCount || 0), 0);
+    
+    // 3. Dynamically count unique tools from the 'tags' arrays
+    // .flatMap puts all tags into one giant array, and 'new Set()' removes all duplicates!
+    const uniqueToolsCount = new Set(projects.flatMap(p => p.tags)).size;
+
+    // Trigger animations with the dynamic variables
+    animateCounter('stat-projects', totalProjects)
+    animateCounter('stat-models', totalModels)
+    animateCounter('stat-tools', uniqueToolsCount)
+    
     initNavbar()
     initScrollSpy()
 })

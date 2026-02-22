@@ -248,14 +248,18 @@ section { padding: 100px 2rem; }
 .projects { background: var(--bg-secondary); }
 
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /*grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));*/
     gap: 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .project-card {
+    flex: 1 1 320px; /* Allows the card to grow, shrink, with a base of 320px */
+    max-width: 380px; /* Prevents a single card from stretching out too wide */
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -553,7 +557,7 @@ section { padding: 100px 2rem; }
 
 /* ── ABOUT ───────────────────────────────────────────────── */
 .about {
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
     display: flex;
     justify-content: center;
 }
@@ -593,25 +597,36 @@ section { padding: 100px 2rem; }
 }
 
 /* ── CONTACT ─────────────────────────────────────────────── */
-.contact { background: var(--bg-primary); }
+.contact { background: var(--bg-secondary); }
 
-.contact-links {
+.social-links {
     display: flex;
-    gap: 1.5rem;
     justify-content: center;
-    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
 }
 
-.contact-card {
+.social-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     color: var(--text-primary);
+    border-radius: 50%;
+    font-size: 1.5rem;
     text-decoration: none;
-    padding: 1.2rem 2.5rem;
-    border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 1rem;
     transition: var(--transition);
+}
+
+.social-icon:hover {
+    background: var(--accent);
+    color: var(--bg-primary);
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(240, 192, 64, 0.3);
 }
 
 .contact-card:hover {
@@ -723,4 +738,21 @@ footer {
     letter-spacing: -1.5px;
     margin-bottom: 1rem;
     line-height: 1.1;
+}
+
+.contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 1.2rem 2.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    
+    /* Add these 3 lines to align the new logos perfectly */
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
