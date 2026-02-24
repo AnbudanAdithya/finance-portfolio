@@ -557,7 +557,7 @@ section { padding: 100px 2rem; }
 
 /* ── ABOUT ───────────────────────────────────────────────── */
 .about {
-    background: var(--bg-primary);
+    background: var(--bg-secondary);
     display: flex;
     justify-content: center;
 }
@@ -597,7 +597,7 @@ section { padding: 100px 2rem; }
 }
 
 /* ── CONTACT ─────────────────────────────────────────────── */
-.contact { background: var(--bg-secondary); }
+.contact { background: var(--bg-primary); }
 
 .social-links {
     display: flex;

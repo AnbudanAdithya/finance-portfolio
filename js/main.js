@@ -1,5 +1,4 @@
 // ── PROJECT DATA ──────────────────────────────────────────────
-// Add or remove projects here — cards are auto-generated
 const projects = [
      {
         icon: '💰',
@@ -8,10 +7,10 @@ const projects = [
         tags: ['Excel + VBA', 'DCF', 'Graphs'],
         status: 'Completed',
         year: '2026',
-        link: 'payback.html',
-        modelCount: 3
+        link: 'HTML/payback.html',
+        modelCount: 3,
+        category: 'model' // ← Added Category
     },
-
     {
         icon: '📊',
         title: 'Portfolio Optimization Model',
@@ -20,33 +19,40 @@ const projects = [
         status: 'Coming Soon',
         year: '2026',
         link: null,
-        modelCount: 4
-    },
-    /*
-    {
-        icon: '📈',
-        title: 'DCF Valuation Model',
-        description: 'Discounted Cash Flow model for equity valuation using real company financials. Includes scenario analysis and sensitivity tables.',
-        tags: ['Excel', 'Valuation', 'DCF', 'Finance'],
-        status: 'Coming Soon',
-        year: '2026',
-        link: null
+        modelCount: 4,
+        category: 'model' // ← Added Category
     },
     {
-        icon: '🏦',
-        title: 'LBO Model',
-        description: 'Leveraged Buyout model simulating a private equity acquisition with full debt schedules, returns analysis, IRR and MOIC outputs.',
-        tags: ['Excel', 'Private Equity', 'LBO', 'IRR'],
-        status: 'Coming Soon',
-        year: '2026',
-        link: null
-    },*/
+        icon: '🩺',
+        title: 'Apollo Hospitals Equity Research',
+        description: 'A fundamental analysis report evaluating Apollo Hospitals, featuring industry analysis, financial performance ratios, relative valuation, and an investment recommendation.',
+        tags: ['Equity Research', 'Fundamental Analysis', 'Valuation'],
+        status: 'Completed',
+        year: '2025',
+        link: 'HTML/apollo.html', 
+        modelCount: 0,
+        category: 'research' // ← Added Category
+    },
+    {
+        icon: '🚗',
+        title: 'Tata Motors Financial Analysis',
+        description: 'A comprehensive evaluation of Tata Motors\' financial health through income statements, balance sheets, cash flow trends, and core financial ratios.',
+        tags: ['Financial Analysis', 'Ratio Analysis', 'Corporate Finance'],
+        status: 'Completed',
+        year: '2024',
+        link: 'HTML/tata-motors.html', 
+        modelCount: 0,
+        category: 'research' // ← Added Category
+    }
 ]
 
 // ── INJECT PROJECT CARDS ──────────────────────────────────────
 function renderProjects() {
-    const grid = document.getElementById('projects-grid')
-    grid.innerHTML = ''
+    const modelsGrid = document.getElementById('models-grid')
+    const researchGrid = document.getElementById('research-grid')
+    
+    if(modelsGrid) modelsGrid.innerHTML = ''
+    if(researchGrid) researchGrid.innerHTML = ''
 
     projects.forEach(p => {
         const statusColor = p.status === 'Completed'   ? '#00e599'
@@ -54,15 +60,19 @@ function renderProjects() {
                           : '#606070'
 
         const tags   = p.tags.map(t => `<span class="tag">${t}</span>`).join('')
+        
+        // Dynamically change button text based on category
+        const buttonText = p.category === 'research' ? 'View Report →' : 'Open Model →'
+        
         const button = p.link
             ? `<a href="${p.link}" class="btn-primary" style="font-size:0.85rem; padding:8px 20px;">
-                   Open Model →
+                   ${buttonText}
                </a>`
             : `<span style="font-size:0.82rem; color:var(--text-muted); font-style:italic;">
                    Coming Soon
                </span>`
 
-        grid.innerHTML += `
+        const cardHTML = `
             <div class="project-card">
                 <div class="project-icon">${p.icon}</div>
                 <h3>${p.title}</h3>
@@ -77,6 +87,13 @@ function renderProjects() {
                 </div>
             </div>
         `
+
+        // Inject into the correct section
+        if (p.category === 'model' && modelsGrid) {
+            modelsGrid.innerHTML += cardHTML
+        } else if (p.category === 'research' && researchGrid) {
+            researchGrid.innerHTML += cardHTML
+        }
     })
 }
 
