@@ -251,7 +251,6 @@ section { padding: 100px 2rem; }
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /*grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));*/
     gap: 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -483,72 +482,6 @@ section { padding: 100px 2rem; }
     border-radius: var(--radius);
     padding: 2rem;
 }
-
-/* ── INPUT TABLE (uneven mode) ───────────────────────────── */
-.input-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85rem;
-}
-
-.input-table th {
-    background: var(--bg-primary);
-    color: var(--text-secondary);
-    padding: 10px 12px;
-    text-align: center;
-    font-weight: 600;
-    border-bottom: 1px solid var(--border);
-}
-
-.input-table td {
-    padding: 6px 8px;
-    border-bottom: 1px solid var(--border);
-    text-align: center;
-}
-
-.table-input {
-    width: 100%;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 8px 10px;
-    color: var(--text-primary);
-    font-size: 0.85rem;
-    font-family: var(--font);
-    outline: none;
-    text-align: right;
-    transition: var(--transition);
-}
-
-.table-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(240,192,64,0.1);
-}
-
-/* ── TOGGLE ──────────────────────────────────────────────── */
-.toggle-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 4px;
-}
-
-.toggle-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    padding: 8px 12px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    transition: var(--transition);
-}
-
-.toggle-option:hover { border-color: var(--accent); color: var(--text-primary); }
-.toggle-option input[type="radio"] { accent-color: var(--accent); }
-
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 768px) {
     .inputs-grid { grid-template-columns: 1fr; }
@@ -645,8 +578,34 @@ footer {
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
+.hamburger { display: none; }
+
 @media (max-width: 768px) {
-    .nav-links { display: none; }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 64px; left: 0; right: 0;
+        background: rgba(10, 10, 15, 0.97);
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1.2rem;
+    }
+    .nav-links.open { display: flex; }
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+    }
+    .hamburger span {
+        width: 25px; height: 2px;
+        background: var(--accent);
+        border-radius: 2px;
+    }
     .calculator-wrapper { grid-template-columns: 1fr; }
     .hero-stats { gap: 1rem; }
     .stat-card { padding: 1rem 1.5rem; }

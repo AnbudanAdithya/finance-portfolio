@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Apollo Hospitals Fundamental Analysis</title>
+    <title>Apollo Hospitals Fundamental Analysis | S Adithya</title>
+    <meta name="description" content="In-depth equity research on Apollo Hospitals covering qualitative factors, Porter's 5 Forces, financial ratios, and investment recommendation.">
     <link rel="icon" href="../images/favicon.png" type="image/png"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
     <nav id="navbar">
         <div class="nav-container">
-            <div class="nav-logo">FinancePortfolio</div>
+            <div class="nav-logo">S Adithya | Finance Portfolio</div>
             <ul class="nav-links">
                 <li><a href="../index.html">← Back to Portfolio</a></li>
             </ul>
@@ -37,12 +41,13 @@
                     </a>
                 </div>
 
-                <div style="width: 100%; height: 75vh; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);">
+                <div style="width: 100%; height: 75vh; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); position: relative;">
+                    <p style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:var(--text-muted); font-size:0.9rem;">Loading PDF...</p>
                     <iframe 
                         src="../assets/PDF/Fundamental_Analysis.pdf" 
                         width="100%" 
                         height="100%" 
-                        style="border: none;">
+                        style="border: none; position: relative; z-index: 1;">
                         <p>Your browser does not support PDFs. 
                         <a href="../assets/PDF/Fundamental_Analysis.pdf" style="color: var(--accent);">Download the PDF</a>.</p>
                     </iframe>
@@ -56,9 +61,6 @@
         <p>Built with 💛 | Finance Portfolio © 2026 | <a href="../index.html" style="color:var(--accent); text-decoration:none;">← Back to Portfolio</a></p>
     </footer>
 
-    <script>
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => { navbar.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.4)' : 'none'; });
-    </script>
+    <script src="../js/main.js"></script>
 </body>
 </html>

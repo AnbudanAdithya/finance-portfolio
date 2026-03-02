@@ -73,7 +73,7 @@ function renderProjects() {
                </span>`
 
         const cardHTML = `
-            <div class="project-card">
+                <div class="project-card" ${!p.link ? 'style="opacity:0.65; cursor:not-allowed;"' : ''}>
                 <div class="project-icon">${p.icon}</div>
                 <h3>${p.title}</h3>
                 <p>${p.description}</p>
@@ -101,6 +101,7 @@ function renderProjects() {
 // Counts up from 0 to target number on page load
 function animateCounter(id, target, duration = 1500) {
     const el = document.getElementById(id)
+    if (!el) return                        // ← Add this guard
     const step = target / (duration / 16)
     let current = 0
 
@@ -156,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalProjects = projects.length;
     
     // 2. Dynamically sum up the 'modelCount' from all projects
-    const totalModels = projects.reduce((sum, project) => sum + (project.modelCount || 0), 0);
+    const totalModels = projects.filter(p => p.status === 'Completed').length;
     
     // 3. Dynamically count unique tools from the 'tags' arrays
     // .flatMap puts all tags into one giant array, and 'new Set()' removes all duplicates!
@@ -168,5 +169,16 @@ document.addEventListener('DOMContentLoaded', () => {
     animateCounter('stat-tools', uniqueToolsCount)
     
     initNavbar()
-    initScrollSpy()
+    if (document.querySelectorAll('section').length > 1) {
+        initScrollSpy()
+    }
+
+    const footerYear = document.getElementById('footer-year');
+    if (footerYear) footerYear.textContent = new Date().getFullYear();
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    }
 })

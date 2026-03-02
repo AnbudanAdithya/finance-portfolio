@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Finance Portfolio</title>
+    <title>S Adithya | Finance Portfolio</title>
+    <meta name="description" content="Interactive financial models and equity research by S Adithya.">
     <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,7 +19,7 @@
     <!-- ── NAVIGATION ──────────────────────────────────────── -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="nav-logo">FinancePortfolio</div>
+            <div class="nav-logo">S Adithya | Finance Portfolio</div>
             <ul class="nav-links">
                 <li><a href="https://adithya05.vercel.app/index.html">Home</a></li>
                 <li><a href="#models">Models</a></li>
@@ -23,6 +27,10 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="hamburger" id="hamburger" aria-label="Open menu" type="button">
+                <span></span><span></span><span></span>
+            </button>
+
         </div>
     </nav>
 
@@ -44,7 +52,7 @@
             </div>
             <div class="stat-card">
                 <h3 id="stat-models">0</h3>
-                <p>Models</p>
+                <p>Completed</p>
             </div>
             <div class="stat-card">
                 <h3 id="stat-tools">0</h3>
@@ -101,15 +109,15 @@
             <p class="section-sub">Open to collaborations, internships, and finance roles.</p>
         </div>
         <ul class="social-links">
-            <li><a href="mailto:adithyas0503@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/s-adithya-918009294/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
-            <li><a href="https://github.com/AnbudanAdithya" target="_blank" class="social-icon"><i class="fab fa-github"></i></a></li>
+            <li><a href="mailto:adithyas0503@gmail.com" class="social-icon" aria-label="Send email"><i class="fas fa-envelope"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/s-adithya-918009294/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn profile"><i class="fab fa-linkedin-in"></i></a></li>
+            <li><a href="https://github.com/AnbudanAdithya" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub profile"><i class="fab fa-github"></i></a></li>
         </ul>
     </section>
 
     <!-- ── FOOTER ────────────────────────────────────────────── -->
     <footer>
-        <p>Built with 💛 | Finance Portfolio <span></span>© 2025</p>
+        <p>Built with 💛 | Finance Portfolio © <span id="footer-year"></span></p>
     </footer>
 
     <script src="js/main.js"></script>

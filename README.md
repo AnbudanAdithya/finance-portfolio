@@ -9,7 +9,7 @@ Welcome to my Finance Portfolio! This repository serves as a centralized hub for
 This repository is actively maintained, with new financial models and academic reports being added regularly. 
 
 ### Interactive Financial Models
-* **Portfolio Optimization Model:** A full-stack application built using Modern Portfolio Theory (MPT) to find optimal asset allocation. It calculates the Efficient Frontier, Max Sharpe Ratio, and Minimum Variance portfolios.
+* **Portfolio Optimization Model (*In Progress*):** A full-stack application built using Modern Portfolio Theory (MPT) to find optimal asset allocation. It calculates the Efficient Frontier, Max Sharpe Ratio, and Minimum Variance portfolios.
 * **Payback Period Calculator:** An interactive tool to calculate standard and discounted payback periods for any given cash flow stream.
 
 ### Academic Research & Reports

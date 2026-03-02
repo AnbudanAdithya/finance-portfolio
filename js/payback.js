@@ -14,11 +14,6 @@ function onModeChange() {
 }
 
 // ── GENERATE INPUT TABLE ──────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('btn-generate')
-    if (btn) btn.addEventListener('click', generateInputTable)
-})
-
 function generateInputTable() {
     numYears = parseInt(document.getElementById('num-years').value)
 
@@ -90,6 +85,12 @@ function runCalculator() {
     }
     if (isNaN(discountRate) || isNaN(taxRate)) {
         alert('⚠️ Please fill in Discount Rate and Tax Rate.'); return
+    }
+    if (discountRate < 0 || discountRate > 1) {
+        alert('⚠️ Discount Rate must be between 0% and 100%.'); return
+    }
+    if (taxRate < 0 || taxRate > 1) {
+        alert('⚠️ Tax Rate must be between 0% and 100%.'); return
     }
     if (!numYears || numYears < 1) {
         alert('⚠️ Please click Generate Input Table first.'); return
@@ -380,12 +381,12 @@ function renderChart(years, cumulativeCF, cumulativeDCF, netCF, investment) {
                             // 3. Apply these custom shapes to the correct datasets
                             const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
                             labels.forEach((label, i) => {
-                                if (i === 2) {
-                                    label.pointStyle = createDualBox(); // Cash Flow
-                                } else if (i === 0) {
+                                if (i === 0) {
                                     label.pointStyle = createLineMarker('#f0c040', false); // Cumul CF
                                 } else if (i === 1) {
                                     label.pointStyle = createLineMarker('#00e599', true);  // Disc Cumul CF
+                                } else if (i === 2) {
+                                    label.pointStyle = createDualBox(); // Cash Flow
                                 }
                             });
                             return labels;
@@ -402,7 +403,7 @@ function renderChart(years, cumulativeCF, cumulativeDCF, netCF, investment) {
                     callbacks: {
                         label: ctx => {
                             const v = ctx.raw
-                            return ` ${ctx.dataset.label}: ${v < 0 ? '-' : '+'}$${Math.abs(v).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`
+                            return ` ${ctx.dataset.label}: ${v < 0 ? '-' : '+'}₹${Math.abs(v).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`
                         }
                     }
                 }
