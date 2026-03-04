@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Apollo Hospitals Fundamental Analysis | S Adithya</title>
     <meta name="description" content="In-depth equity research on Apollo Hospitals covering qualitative factors, Porter's 5 Forces, financial ratios, and investment recommendation.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="S Adithya">
+    <link rel="canonical" href="https://sa05-finance.vercel.app/HTML/apollo.html">
+    <!-- Graph Tags-->
+    <meta property="og:title" content="Apollo Hospitals Fundamental Analysis | S Adithya">
+    <meta property="og:description" content="In-depth equity research on Apollo Hospitals covering qualitative factors, Porter's 5 Forces, and financial ratios.">
+    <meta property="og:url" content="https://sa05-finance.vercel.app/HTML/apollo.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://sa05-finance.vercel.app/images/favicon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Apollo Hospitals Fundamental Analysis | S Adithya">
+    <meta name="twitter:description" content="In-depth equity research on Apollo Hospitals.">
+    
     <link rel="icon" href="../images/favicon.png" type="image/png"/>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -30,26 +42,24 @@
         </div>
     </section>
 
-    <section class="calculator-section" style="padding-top: 0;">
-        <div class="calculator-vertical" style="max-width: 1000px; margin: 0 auto;">
-            
-            <div class="calc-inputs-top" style="padding: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 0 1rem;">
-                    <h3 style="margin: 0;">📄 Analysis Report</h3>
-                    <a href="../assets/PDF/Fundamental_Analysis.pdf" target="_blank" class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+    <section class="calculator-section report-section">
+        <div class="calculator-vertical report-container">
+
+            <div class="calc-inputs-top report-card">
+                <div class="report-card-header">
+                    <h3>📄 Analysis Report</h3>
+                    <a href="../assets/PDF/Fundamental_Analysis.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-sm">
                         Open in New Tab ↗
                     </a>
                 </div>
 
-                <div style="width: 100%; height: 75vh; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); position: relative;">
-                    <p style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:var(--text-muted); font-size:0.9rem;">Loading PDF...</p>
-                    <iframe 
-                        src="../assets/PDF/Fundamental_Analysis.pdf" 
-                        width="100%" 
-                        height="100%" 
-                        style="border: none; position: relative; z-index: 1;">
-                        <p>Your browser does not support PDFs. 
-                        <a href="../assets/PDF/Fundamental_Analysis.pdf" style="color: var(--accent);">Download the PDF</a>.</p>
+                <div class="pdf-viewer">
+                    <p class="pdf-loading">Loading PDF...</p>
+                    <iframe
+                        src="../assets/PDF/Fundamental_Analysis.pdf"
+                        class="pdf-iframe">
+                        <p>Your browser does not support PDFs.
+                        <a href="../assets/PDF/Fundamental_Analysis.pdf">Download the PDF</a>.</p>
                     </iframe>
                 </div>
             </div>
@@ -58,9 +68,9 @@
     </section>
 
     <footer>
-        <p>Built with 💛 | Finance Portfolio © 2026 | <a href="../index.html" style="color:var(--accent); text-decoration:none;">← Back to Portfolio</a></p>
+        <p>Built with 💛 | Finance Portfolio © <span id="footer-year"></span> | <a href="../index.html">← Back to Portfolio</a></p>
     </footer>
 
+    <button id="scroll-top" aria-label="Back to top">↑</button>
     <script src="../js/main.js"></script>
 </body>
-</html>

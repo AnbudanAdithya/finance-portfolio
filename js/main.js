@@ -173,12 +173,24 @@ document.addEventListener('DOMContentLoaded', () => {
         initScrollSpy()
     }
 
-    const footerYear = document.getElementById('footer-year');
-    if (footerYear) footerYear.textContent = new Date().getFullYear();
-
-    const hamburger = document.getElementById('hamburger');
+        const hamburger = document.getElementById('hamburger');
     const navLinks = document.querySelector('.nav-links');
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
     }
+
+    // ── SCROLL TO TOP ─────────────────────────────────────────
+    const scrollBtn = document.getElementById('scroll-top');
+    if (scrollBtn) {
+        window.addEventListener('scroll', () => {
+            scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        });
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // ── FOOTER YEAR ───────────────────────────────────────────
+    const footerYear = document.getElementById('footer-year');
+    if (footerYear) footerYear.textContent = new Date().getFullYear();
 })
