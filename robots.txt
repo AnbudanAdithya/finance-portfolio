@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sa05-finance.vercel.app/sitemap.xml

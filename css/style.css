@@ -267,6 +267,7 @@ section { padding: 100px 2rem; }
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    will-change: transform;
 }
 
 .project-card::before {
@@ -808,3 +809,18 @@ footer a:hover {
 }
 
 .research-section { background: var(--bg-primary); }
+
+/* ── FOCUS STYLES ────────────────────────────────────────── */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ── UNEVEN NOTE ─────────────────────────────────────────── */
+.cf-uneven-note { display: none; }
+.cf-uneven-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
