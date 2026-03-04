@@ -84,6 +84,8 @@ body {
 
 .nav-links a:hover { color: var(--accent); }
 
+.hamburger { display: none; }
+
 /* ── HERO ─────────────────────────────────────────────────── */
 .hero {
     min-height: 100vh;
@@ -208,6 +210,11 @@ body {
     transform: translateY(-2px);
 }
 
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
 /* ── SECTIONS ────────────────────────────────────────────── */
 section { padding: 100px 2rem; }
 
@@ -246,6 +253,7 @@ section { padding: 100px 2rem; }
 
 /* ── PROJECTS GRID ───────────────────────────────────────── */
 .projects { background: var(--bg-secondary); }
+.research-section { background: var(--bg-primary); }
 
 .projects-grid {
     display: flex;
@@ -257,8 +265,8 @@ section { padding: 100px 2rem; }
 }
 
 .project-card {
-    flex: 1 1 320px; /* Allows the card to grow, shrink, with a base of 320px */
-    max-width: 380px; /* Prevents a single card from stretching out too wide */
+    flex: 1 1 320px;
+    max-width: 380px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -280,7 +288,7 @@ section { padding: 100px 2rem; }
     transition: var(--transition);
 }
 
-.project-card:hover { 
+.project-card:hover {
     border-color: var(--accent);
     transform: translateY(-6px);
 }
@@ -343,7 +351,7 @@ section { padding: 100px 2rem; }
     gap: 2rem;
 }
 
-/* ── INPUT PANEL (top) ───────────────────────────────────── */
+/* ── INPUT PANEL ─────────────────────────────────────────── */
 .calc-inputs-top {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -366,9 +374,7 @@ section { padding: 100px 2rem; }
 
 .input-col { display: flex; flex-direction: column; gap: 0; }
 
-.input-group {
-    margin-bottom: 1.1rem;
-}
+.input-group { margin-bottom: 1.1rem; }
 
 .input-group label {
     display: block;
@@ -405,11 +411,9 @@ section { padding: 100px 2rem; }
     justify-content: center;
 }
 
-.calc-actions button {
-    min-width: 220px;
-}
+.calc-actions button { min-width: 220px; }
 
-/* ── RESULTS PANEL (full width) ──────────────────────────── */
+/* ── RESULTS PANEL ───────────────────────────────────────── */
 .calc-results-full {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -474,7 +478,74 @@ section { padding: 100px 2rem; }
 .cf-table td:first-child { text-align: left; font-weight: 500; }
 .cf-table tr:hover td { background: rgba(240,192,64,0.04); }
 .cf-table .positive { color: var(--success); font-weight: 600; }
-.cf-table .negative { color: var(--danger);  font-weight: 600; }
+.cf-table .negative { color: var(--danger); font-weight: 600; }
+
+/* ── INPUT TABLE ─────────────────────────────────────────── */
+.input-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+}
+
+.input-table th {
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    padding: 10px 8px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+}
+
+.input-table td {
+    padding: 6px 4px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.table-input {
+    width: 100%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 8px;
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    font-family: var(--font);
+    outline: none;
+    text-align: right;
+    transition: var(--transition);
+}
+
+.table-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(240,192,64,0.1);
+}
+
+/* ── INVESTMENT TOGGLE ───────────────────────────────────── */
+.toggle-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 4px;
+}
+
+.toggle-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.toggle-option:hover { border-color: var(--accent); color: var(--text-primary); }
+.toggle-option input[type="radio"] { accent-color: var(--accent); }
 
 /* ── CHART ───────────────────────────────────────────────── */
 .chart-wrapper {
@@ -483,10 +554,69 @@ section { padding: 100px 2rem; }
     border-radius: var(--radius);
     padding: 2rem;
 }
-/* ── RESPONSIVE ──────────────────────────────────────────── */
-@media (max-width: 768px) {
-    .inputs-grid { grid-template-columns: 1fr; }
-    .calc-actions { flex-direction: column; }
+
+/* ── MODEL PAGE HERO ─────────────────────────────────────── */
+.model-hero {
+    padding: 120px 2rem 60px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 40%, #1a1a2e 0%, var(--bg-primary) 70%);
+}
+
+.model-hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.model-hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+/* ── PDF REPORT PAGES ────────────────────────────────────── */
+.report-section { padding-top: 0; }
+
+.report-container { max-width: 1000px; margin: 0 auto; }
+
+.report-card { padding: 1rem; }
+
+.report-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+}
+
+.report-card-header h3 { margin: 0; }
+
+.pdf-viewer {
+    width: 100%;
+    height: 75vh;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+.pdf-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+.pdf-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    position: relative;
+    z-index: 1;
 }
 
 /* ── ABOUT ───────────────────────────────────────────────── */
@@ -563,6 +693,21 @@ section { padding: 100px 2rem; }
     box-shadow: 0 5px 15px rgba(240, 192, 64, 0.3);
 }
 
+.contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 1.2rem 2.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .contact-card:hover {
     border-color: var(--accent);
     color: var(--accent);
@@ -578,10 +723,62 @@ footer {
     border-top: 1px solid var(--border);
 }
 
-/* ── RESPONSIVE ──────────────────────────────────────────── */
-.hamburger { display: none; }
+footer a {
+    color: var(--accent);
+    text-decoration: none;
+}
 
+footer a:hover { text-decoration: underline; }
+
+/* ── SCROLL TO TOP ───────────────────────────────────────── */
+#scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(240,192,64,0.3);
+    transition: var(--transition);
+}
+
+#scroll-top:hover { background: var(--accent-hover); }
+
+/* ── FOCUS STYLES ────────────────────────────────────────── */
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ── UNEVEN NOTE ─────────────────────────────────────────── */
+.cf-uneven-note { display: none; }
+
+.cf-uneven-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+/* ── PRINT STYLES ────────────────────────────────────────── */
+@media print {
+    #navbar, footer, #scroll-top { display: none; }
+    body { background: white; color: black; }
+    .highlight { color: #b8860b; }
+}
+
+/* ── RESPONSIVE (mobile) ─────────────────────────────────── */
 @media (max-width: 768px) {
+    /* Navigation */
     .nav-links {
         display: none;
         flex-direction: column;
@@ -607,220 +804,12 @@ footer {
         background: var(--accent);
         border-radius: 2px;
     }
-    .calculator-wrapper { grid-template-columns: 1fr; }
+
+    /* Hero */
     .hero-stats { gap: 1rem; }
     .stat-card { padding: 1rem 1.5rem; }
-}
 
-/* ── INPUT TABLE ─────────────────────────────────────────── */
-.input-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82rem;
-    margin-bottom: 1rem;
-}
-
-.input-table th {
-    background: var(--bg-primary);
-    color: var(--text-secondary);
-    padding: 10px 8px;
-    text-align: center;
-    font-weight: 600;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.78rem;
-}
-
-.input-table td {
-    padding: 6px 4px;
-    border-bottom: 1px solid var(--border);
-    text-align: center;
-}
-
-.table-input {
-    width: 100%;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 7px 8px;
-    color: var(--text-primary);
-    font-size: 0.82rem;
-    font-family: var(--font);
-    outline: none;
-    text-align: right;
-    transition: var(--transition);
-}
-
-.table-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(240,192,64,0.1);
-}
-
-/* ── INVESTMENT TOGGLE ───────────────────────────────────── */
-.toggle-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 4px;
-}
-
-.toggle-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    padding: 8px 12px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    transition: var(--transition);
-}
-
-.toggle-option:hover { border-color: var(--accent); color: var(--text-primary); }
-
-.toggle-option input[type="radio"] { accent-color: var(--accent); }
-
-/* ── MODEL PAGE HERO ─────────────────────────────────────── */
-.model-hero {
-    padding: 120px 2rem 60px;
-    text-align: center;
-    background: radial-gradient(ellipse at 50% 40%, #1a1a2e 0%, var(--bg-primary) 70%);
-}
-
-.model-hero-content {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.model-hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: -1.5px;
-    margin-bottom: 1rem;
-    line-height: 1.1;
-}
-
-.contact-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    color: var(--text-primary);
-    text-decoration: none;
-    padding: 1.2rem 2.5rem;
-    border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
-    
-    /* Add these 3 lines to align the new logos perfectly */
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* ── PDF REPORT PAGES ────────────────────────────────────── */
-.report-section { padding-top: 0; }
-
-.report-container {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.report-card { padding: 1rem; }
-
-.report-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 0 1rem;
-}
-
-.report-card-header h3 { margin: 0; }
-
-.btn-sm {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-}
-
-.pdf-viewer {
-    width: 100%;
-    height: 75vh;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    position: relative;
-}
-
-.pdf-loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    pointer-events: none;
-}
-
-.pdf-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    position: relative;
-    z-index: 1;
-}
-
-/* ── SCROLL TO TOP ───────────────────────────────────────── */
-#scroll-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--accent);
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    box-shadow: 0 4px 15px rgba(240,192,64,0.3);
-    transition: var(--transition);
-}
-
-#scroll-top:hover { background: var(--accent-hover); }
-
-/* ── PRINT STYLES ────────────────────────────────────────── */
-@media print {
-    #navbar, footer, .btn-card, #scroll-top { display: none; }
-    body { background: white; color: black; }
-    .timeline-card { border: 1px solid #ccc; box-shadow: none; transform: none; }
-    .highlight { color: #b8860b; }
-}
-
-footer a {
-    color: var(--accent);
-    text-decoration: none;
-}
-footer a:hover {
-    text-decoration: underline;
-}
-
-.research-section { background: var(--bg-primary); }
-
-/* ── FOCUS STYLES ────────────────────────────────────────── */
-a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 4px;
-}
-
-/* ── UNEVEN NOTE ─────────────────────────────────────────── */
-.cf-uneven-note { display: none; }
-.cf-uneven-text {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin-top: 0.5rem;
+    /* Calculator */
+    .inputs-grid { grid-template-columns: 1fr; }
+    .calc-actions { flex-direction: column; }
 }
